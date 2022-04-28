@@ -3,12 +3,20 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ShoppingCartService} from "../../../services/shopping-cart.service";
 import {CountriesService} from "../../../services/countries.service";
 import {CurrenciesService} from "../../../services/currencies.service";
+import {TUI_VALIDATION_ERRORS} from "@taiga-ui/kit";
 
 
 @Component({
   selector: 'app-market-shopping-cart',
   templateUrl: './market-shopping-cart.component.html',
   styleUrls: ['./market-shopping-cart.component.less'],
+  providers: [{
+    provide: TUI_VALIDATION_ERRORS,
+    useValue: {
+      required: 'Поле обязательно для заполнения',
+      email: 'Неправильный формат электронной почты'
+    },
+  }]
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MarketShoppingCartComponent implements OnInit {
