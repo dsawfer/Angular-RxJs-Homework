@@ -1,0 +1,30 @@
+<div class="content">
+  <div class="title">
+    {{productData.product.title}}
+  </div>
+
+  <div class="count">
+    <tui-badge
+      status="primary"
+      class="tui-space_right-2"
+      [value]="productData.count"
+    ></tui-badge>
+  </div>
+
+  <div class="delete" (click)="deleteItem()">
+    <tui-svg
+      src="tuiIconTrashLarge"
+      class="icon"
+    ></tui-svg>
+  </div>
+
+  <div class="inputCount" [formGroup]="itemForm">
+    <tui-input-count formControlName="itemCountValue"
+                     tuiTextfieldSize="m"
+                     [tuiTextfieldLabelOutside]="true"
+    ></tui-input-count>
+  </div>
+
+</div>
+
+<!--[ngClass]="!hasBackground ? 'colored' : ''"-->

@@ -1,0 +1,37 @@
+<div class="content">
+  <div class="image">
+    <img src="{{productData.image}}" alt="{{productData.title}}" />
+  </div>
+
+  <div class="title">
+    {{productData.title}}
+  </div>
+
+  <div class="price-and-count">
+    <div class="price">
+      {{getFormattedPrice()}}
+    </div>
+
+    <div class="count" [formGroup]="form">
+      <tui-input-count
+        formControlName="countValue"
+        tuiTextfieldSize="m"
+        [tuiTextfieldLabelOutside]="true"
+      >
+      </tui-input-count>
+    </div>
+  </div>
+
+  <div class="addToCart">
+    <button
+      class="button"
+      tuiIconButton
+      type="button"
+      appearance="custom"
+      icon="tuiIconPlusLarge"
+      (click)="addToShoppingCart()"
+      size="m"
+    >
+    </button>
+  </div>
+</div>

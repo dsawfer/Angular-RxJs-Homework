@@ -1,0 +1,84 @@
+<div class="content">
+  <div class="product-list">
+    <div class="items">
+      <app-market-product-item *ngFor="let p of shoppingCartService.shoppingCart; index as i"
+                               [productData] = "p"
+      >
+      </app-market-product-item>
+    </div>
+  </div>
+
+  <div class="total-sum">
+    <div class="moneyIndicator">
+      {{shoppingCartService.getSum()}}
+    </div>
+<!--    <tui-money-->
+<!--      class="moneyIndicator"-->
+<!--      [value]="shoppingCartService.getSum()"-->
+<!--    ></tui-money>-->
+  </div>
+
+  <form class="form" [formGroup]="registrationForm">
+    <div class="tui-form__row tui-form__row_multi-fields">
+      <div class="tui-form__multi-field">
+        <tui-select
+          formControlName="countryValue"
+        >
+          Страна
+          <input
+            tuiTextfield
+            placeholder="Выберите свою страну"
+          />
+          <tui-data-list-wrapper
+            *tuiDataList
+            [items]="countriesService.countiesNames"
+          ></tui-data-list-wrapper>
+        </tui-select>
+      </div>
+      <div class="tui-form__multi-field">
+        <tui-input formControlName="addressValue">
+          Адрес доставки
+          <span class="tui-required"></span>
+        </tui-input>
+        <tui-field-error
+          formControlName="addressValue"
+        ></tui-field-error>
+      </div>
+    </div>
+
+
+    <div class="tui-form__row tui-form__row_multi-fields">
+      <div class="tui-form__multi-field">
+        <tui-input formControlName="nameValue">
+          Имя
+          <span class="tui-required"></span>
+        </tui-input>
+        <tui-field-error
+          formControlName="nameValue"
+        ></tui-field-error>
+      </div>
+      <div class="tui-form__multi-field">
+        <tui-input formControlName="emailValue">
+          Электронная почта
+          <span class="tui-required"></span>
+        </tui-input>
+        <tui-field-error
+          formControlName="emailValue"
+        ></tui-field-error>
+      </div>
+    </div>
+
+    <div class="tui-form__buttons">
+      <button
+        class="button"
+        tuiIconButton
+        type="button"
+        appearance="custom"
+        size="xl"
+      >
+        Заказать
+      </button>
+    </div>
+
+  </form>
+</div>
