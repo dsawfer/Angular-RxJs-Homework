@@ -3,7 +3,7 @@
     <div class="items">
       <app-market-product-item *ngFor="let p of shoppingCartService.shoppingCart; index as i"
                                [productData] = "p"
-                               (countChanged)="onChange()"
+                               (dataChanged)="onChange()"
       >
       </app-market-product-item>
     </div>

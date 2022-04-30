@@ -23,7 +23,7 @@ import {ShoppingCartEntity, ShoppingCartService} from "../../../services/shoppin
 export class MarketProductItemComponent implements OnInit, OnDestroy{
 
   @Output()
-  countChanged = new EventEmitter<void>();
+  dataChanged = new EventEmitter<void>();
 
   @Input()
   productData!: ShoppingCartEntity;
@@ -41,7 +41,7 @@ export class MarketProductItemComponent implements OnInit, OnDestroy{
     });
     this.itemForm.get('itemCountValue')?.valueChanges.subscribe(value => {
       this.shoppingCartService.setShoppingCartItemCount(this.productData.product.title, value);
-      this.countChanged.emit();
+      this.dataChanged.emit();
     })
     console.info('DEBUG :: Create new market-product-item');
   }
@@ -57,7 +57,7 @@ export class MarketProductItemComponent implements OnInit, OnDestroy{
 
   deleteItem(): void {
     this.shoppingCartService.deleteShoppingCartItem(this.productData.product.title);
-    this.countChanged.emit();
+    this.dataChanged.emit();
   }
 
 }
