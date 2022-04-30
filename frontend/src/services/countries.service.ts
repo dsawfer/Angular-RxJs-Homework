@@ -1,6 +1,5 @@
 import {Inject, Injectable} from "@angular/core";
 import {Country, ICountriesApiService, ICountriesApiServiceToken} from "../interfaces/ICountriesApiService";
-import {CurrenciesService} from "./currencies.service";
 
 
 @Injectable({
@@ -10,6 +9,7 @@ export class CountriesService {
 
   private _countries: Country[] = [];
   private _countiesNames: string[] = [];
+  private _currentCountry: string = 'Russian Federation';
 
   constructor(
     @Inject(ICountriesApiServiceToken) public countriesApiService: ICountriesApiService
@@ -24,6 +24,10 @@ export class CountriesService {
     return this._countiesNames;
   }
 
+  get currentCountry(): string {
+    return this._currentCountry;
+  }
+
   initialize(): void {
     this.countriesApiService.getAll().subscribe(counties => {
         this._countries = counties;
@@ -34,6 +38,7 @@ export class CountriesService {
 
   getCountry(country: string): Country {
     let currentCountry = this._countries.find(c => c.name === country);
+    this._currentCountry = currentCountry!.name;
     return currentCountry!;
   }
 }

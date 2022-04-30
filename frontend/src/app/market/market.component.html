@@ -11,5 +11,5 @@
   </button>
 </div>
 
-<app-market-list [ngClass]="!productService.isShoppingCartHidden ? 'hidden' : ''"></app-market-list>
-<app-market-shopping-cart [ngClass]="productService.isShoppingCartHidden ? 'hidden' : ''"></app-market-shopping-cart>
+<app-market-list *ngIf="productService.isShoppingCartHidden"></app-market-list>
+<app-market-shopping-cart *ngIf="!productService.isShoppingCartHidden"></app-market-shopping-cart>

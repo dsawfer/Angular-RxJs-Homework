@@ -4,6 +4,7 @@ import {IProductsApiService, IProductsApiServiceToken} from "../interfaces/IProd
 
 const path = "../../assets/images/"
 
+
 @Injectable({
   providedIn: 'root'
 })

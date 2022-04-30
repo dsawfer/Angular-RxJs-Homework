@@ -1,6 +1,7 @@
 import {Inject, Injectable} from "@angular/core";
 import {ICurrenciesApiService, ICurrenciesApiServiceToken} from "../interfaces/ICurrenciesApiService";
 import {CountriesService} from "./countries.service";
+import {Observable, of, Subject} from "rxjs";
 
 export interface Currency {
   code: string,
@@ -32,27 +33,34 @@ export class CurrenciesService {
   ) {
   }
 
-  setCurrencyCoefficient(country: string): void {
+  setCurrencyCoefficient(country: string): Observable<void> {
     let countryEntity = this.countriesService.getCountry(country);
     let existingCurrency = this._currencies.find(cur => cur.code === countryEntity.currencies[0].code);
     if (existingCurrency !== undefined) {
       this._currencyCoefficient = existingCurrency.coefficient;
       this._currencySymbol = countryEntity.currencies[0].symbol;
-      return;
+      return of(void 0);
     }
 
-    this.requestCurrency(countryEntity.currencies[0].code, baseCurrency, countryEntity.currencies[0].symbol);
+    return this.requestCurrency(countryEntity.currencies[0].code, baseCurrency, countryEntity.currencies[0].symbol);
   }
 
-  requestCurrency(desired: string, base: string, symbol: string): void {
+  requestCurrency(desired: string, base: string, symbol: string): Observable<void> {
+    let sub = new Subject<void>();
+
     this.currenciesApiService.get(desired, base).subscribe(currency => {
       this._currencies.push({
         code: desired,
         coefficient: currency.rates[desired as keyof typeof currency.rates],
       })
+
       this._currencyCoefficient = this._currencies[this._currencies.length - 1].coefficient;
       this._currencySymbol = symbol;
+
+      sub.next();
     })
+
+    return sub;
   }
 
 }

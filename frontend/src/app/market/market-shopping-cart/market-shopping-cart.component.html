@@ -3,6 +3,7 @@
     <div class="items">
       <app-market-product-item *ngFor="let p of shoppingCartService.shoppingCart; index as i"
                                [productData] = "p"
+                               (countChanged)="onChange()"
       >
       </app-market-product-item>
     </div>
@@ -10,12 +11,8 @@
 
   <div class="total-sum">
     <div class="moneyIndicator">
-      {{shoppingCartService.getSum()}}
+      {{sum}}
     </div>
-<!--    <tui-money-->
-<!--      class="moneyIndicator"-->
-<!--      [value]="shoppingCartService.getSum()"-->
-<!--    ></tui-money>-->
   </div>
 
   <form class="form" [formGroup]="registrationForm">

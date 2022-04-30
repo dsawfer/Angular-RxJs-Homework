@@ -59,8 +59,7 @@ export class ShoppingCartService {
     for (const item of this._shoppingCart) {
       sum += (item.product.price * item.count)
     }
-    return `${(sum * this.currenciesService.currencyCoefficient).toFixed(2)} ${this.currenciesService.currencySymbol}`
-
+    return `${(sum * this.currenciesService.currencyCoefficient).toFixed(2)} ${this.currenciesService.currencySymbol}`;
   }
 
   saveShoppingCart() {
